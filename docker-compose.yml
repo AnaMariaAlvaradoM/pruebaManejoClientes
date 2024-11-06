@@ -1,4 +1,3 @@
-version: '3'
 
 services:
   manejo_clientes:
@@ -10,16 +9,15 @@ services:
       DB_USER_NAME: root
     restart: always
     depends_on:
-      manejoCli:
-        condition: service_healthy
+      - manejoCli
 
   manejoCli:
     image: mysql:8.0.33
     ports:
-      - "3307:3306"
+      - "3306:3306" # O bien "3306:3306" si no hay conflictos
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # Permitir contraseñas vacías
-      MYSQL_DATABASE: gestion_clientes    # Crear la base de datos al iniciar
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: gestion_clientes
     restart: always
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
