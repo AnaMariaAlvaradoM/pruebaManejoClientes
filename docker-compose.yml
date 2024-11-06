@@ -5,7 +5,7 @@ services:
     ports:
       - "9090:9090"
     environment:
-      DB_URL: jdbc:mysql://manejoCli:3306/gestion_clientes?createDatabaseIfNotExist=true
+      DB_URL: jdbc:mysql://manejoCli:3306/gestion_clientes?createDatabaseIfNotExist=true&useSSL=false
       DB_USER_NAME: root
     restart: always
     depends_on:
