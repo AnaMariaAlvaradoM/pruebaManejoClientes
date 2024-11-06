@@ -3,17 +3,16 @@ version: '3'
 services:
   manejo_clientes:
     build: ManejoClientes
-    mem_limit: 512m
     ports:
       - "9090:9090"
     environment:
       DB_URL: jdbc:mysql://manejoCli:3306/gestion_clientes?createDatabaseIfNotExist=true
       DB_USER_NAME: root
-      DB_PASSWORD: 
     restart: always
     depends_on:
       manejoCli:
         condition: service_healthy
+
   manejoCli:
     image: mysql:8.0.33
     ports:
