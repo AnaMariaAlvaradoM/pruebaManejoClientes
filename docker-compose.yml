@@ -14,7 +14,7 @@ services:
   manejoCli:
     image: mysql:8.0.33
     ports:
-      - "3306:3306" # O bien "3306:3306" si no hay conflictos
+      - "3307:3306" # O bien "3306:3306" si no hay conflictos
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: gestion_clientes
