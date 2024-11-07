@@ -1,0 +1,28 @@
+
+services:
+  manejo_clientes:
+    build: ./ManejoClientes
+    mem_limit: 512m
+    ports:
+      - "9090:9090"
+    environment:
+      DB_URL: jdbc:mysql://manejoCli:3306/gestion_clientes?createDatabaseIfNotExist=true&useSSL=false
+      DB_USER_NAME: root
+      DB_PASSWORD: 1234
+    restart: always
+    depends_on:
+      manejoCli:
+          condition: service_healthy
+  manejoCli:
+    image: mysql:8.0.33 
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_PASSWORD: 1234
+      MYSQL_DATABASE: gestion_clientes
+    restart: always
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 10
